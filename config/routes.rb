@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
-  constraints subdomain: "#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}" do
+  constraints subdomain: "#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
     namespace :tenant2, path: '' do
       root to: "dashboard#index"
     end
