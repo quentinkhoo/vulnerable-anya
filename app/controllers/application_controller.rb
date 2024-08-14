@@ -6,7 +6,12 @@ class ApplicationController < ActionController::Base
     render plain: "404 Not Found", status: :not_found
   end
 
+  def log_subdomain
+    Rails.logger.info "Current subdomain: #{request.subdomain}"
+  end
+
   private
+
   def restrict_access
     if !allowed_routes.include?(request.path)
       render plain: "404 Not Found", status: :not_found
