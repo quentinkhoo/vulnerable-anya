@@ -1,4 +1,25 @@
 Rails.application.routes.draw do
+
+  constraints subdomain: ENV.fetch("TENANT1_NAME").downcase do
+    namespace :tenant1, path: '' do
+      post "login", to: "sessions/create", as: :tenant1_login
+      post "logout", to: "sessions/destroy", as: :tenant1_logout
+      root to: "dashboard#index"
+    end
+  end
+
+  constraints subdomain: ENV.fetch("TENANT2_NAME").downcase do
+    namespace :tenant2, path: '' do
+      root to: "dashboard#index"
+    end
+  end
+
+  constraints(lambda { |req| req.subdomains.empty? }) do
+    root to: 'application#not_found'
+  end
+
+  match '*path', to: 'application#not_found', via: :all
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

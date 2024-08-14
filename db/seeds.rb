@@ -11,15 +11,15 @@
 Tenant.destroy_all
 User.destroy_all
 
-Tenant.create!(tenant_name: 'Forger-Family')
-Tenant.create!(tenant_name: 'Desmond-Family')
+Tenant.create!(tenant_name: "#{ENV.fetch("TENANT1_NAME")}")
+Tenant.create!(tenant_name: "#{ENV.fetch("TENANT2_NAME")}")
 
-User.create!(email: 'anya@forger.com', 
-              name: 'Anya', 
-              password_digest: "#{User.digest(ENV.fetch("ANYA_FORGER_PASSWORD"))}", 
-              tenant_name: 'Forger-Family')
+User.create!(email: "#{ENV.fetch("TENANT1_USER")}@#{ENV.fetch("TENANT1_NAME").downcase}.#{ENV.fetch("ROOT_DOMAIN")}", 
+              name: "#{ENV.fetch("TENANT1_USER")}", 
+              password_digest: "#{User.digest(ENV.fetch("TENANT1_USER1_PASSWORD"))}", 
+              tenant_name: "#{ENV.fetch("TENANT1_NAME")}")
 
-User.create!(email: 'damian@forger.com', 
-              name: 'Damian', 
-              password_digest: "#{User.digest(ENV.fetch("DAMIAN_DESMOND_PASSWORD"))}", 
-              tenant_name: 'Desmond-Family')
+User.create!(email: "#{ENV.fetch("TENANT2_USER")}@#{ENV.fetch("TENANT2_NAME").downcase}.#{ENV.fetch("ROOT_DOMAIN")}", 
+              name: "#{ENV.fetch("TENANT2_USER")}", 
+              password_digest: "#{User.digest(ENV.fetch("TENANT2_USER1_PASSWORD"))}", 
+              tenant_name: "#{ENV.fetch("TENANT2_NAME")}")
