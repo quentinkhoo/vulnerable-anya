@@ -11,15 +11,16 @@
 Tenant.destroy_all
 User.destroy_all
 
+# Create Tenant1 Data
 Tenant.create!(tenant_name: "#{ENV.fetch("TENANT1_NAME")}")
-Tenant.create!(tenant_name: "#{ENV.fetch("TENANT2_NAME")}")
-
-User.create!(email: "#{ENV.fetch("TENANT1_USER")}@#{ENV.fetch("TENANT1_NAME").downcase}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}", 
+User.create!(email: "#{ENV.fetch("TENANT1_USER")}@#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase, 
               name: "#{ENV.fetch("TENANT1_USER")}", 
               password_digest: "#{User.digest(ENV.fetch("TENANT1_USER1_PASSWORD"))}", 
               tenant_name: "#{ENV.fetch("TENANT1_NAME")}")
 
-User.create!(email: "#{ENV.fetch("TENANT2_USER")}@#{ENV.fetch("TENANT2_NAME").downcase}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}", 
+# Create Tenant2 Data
+Tenant.create!(tenant_name: "#{ENV.fetch("TENANT2_NAME")}")
+User.create!(email: "#{ENV.fetch("TENANT2_USER")}@#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase, 
               name: "#{ENV.fetch("TENANT2_USER")}", 
               password_digest: "#{User.digest(ENV.fetch("TENANT2_USER1_PASSWORD"))}", 
               tenant_name: "#{ENV.fetch("TENANT2_NAME")}")
