@@ -1,7 +1,6 @@
 class User < ApplicationRecord
 
   has_secure_password :password, validations: true
-  validates :email, presence: true, uniqueness: true
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

@@ -8,19 +8,26 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Tenant.destroy_all
 User.destroy_all
+Tenant.destroy_all
 
 # Create Tenant1 Data
-Tenant.create!(tenant_name: "#{ENV.fetch("TENANT1_NAME")}")
+tenant1 = Tenant.create!(name: "#{ENV.fetch("TENANT1_NAME")}")
 User.create!(email: "#{ENV.fetch("TENANT1_USER")}@#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase, 
               name: "#{ENV.fetch("TENANT1_USER")}", 
               password_digest: "#{User.digest(ENV.fetch("TENANT1_USER1_PASSWORD"))}", 
-              tenant_name: "#{ENV.fetch("TENANT1_NAME")}")
+              tenant_id: tenant1.id)
 
 # Create Tenant2 Data
-Tenant.create!(tenant_name: "#{ENV.fetch("TENANT2_NAME")}")
+tenant2 = Tenant.create!(name: "#{ENV.fetch("TENANT2_NAME")}")
 User.create!(email: "#{ENV.fetch("TENANT2_USER")}@#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase, 
               name: "#{ENV.fetch("TENANT2_USER")}", 
               password_digest: "#{User.digest(ENV.fetch("TENANT2_USER1_PASSWORD"))}", 
-              tenant_name: "#{ENV.fetch("TENANT2_NAME")}")
+              tenant_id: tenant2.id)
+
+# ENABLE ROW LEVEL SECURITY
+sql = """ ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+          ALTER TABLE users FORCE ROW LEVEL SECURITY;
+          CREATE POLICY tenant_isolation_policy ON users USING (tenant_id = current_setting('app.current_tenant_id')::UUID);
+      """
+ActiveRecord::Base.connection.execute(sql)

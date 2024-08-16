@@ -10,22 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_13_091736) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_13_081201) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
-  create_table "tenants", primary_key: "tenant_name", id: :string, force: :cascade do |t|
+  create_table "tenants", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tenant_name"], name: "index_tenants_on_tenant_name", unique: true
   end
 
-  create_table "users", primary_key: "email", id: :string, force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "email"
     t.string "name"
     t.string "password_digest"
-    t.string "tenant_name"
+    t.uuid "tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["tenant_id"], name: "index_users_on_tenant_id"
   end
+
+  add_foreign_key "users", "tenants"
 end
