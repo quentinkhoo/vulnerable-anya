@@ -23,5 +23,6 @@ module VulnerableAnya
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.generators.test_framework false
   end
 end
