@@ -13,17 +13,21 @@ Tenant.destroy_all
 
 # Create Tenant1 Data
 tenant1 = Tenant.create!(name: "#{ENV.fetch("TENANT1_NAME")}")
-User.create!(email: "#{ENV.fetch("TENANT1_USER")}@#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase, 
-              name: "#{ENV.fetch("TENANT1_USER")}", 
-              password_digest: "#{User.digest(ENV.fetch("TENANT1_USER1_PASSWORD"))}", 
-              tenant_id: tenant1.id)
+User.create!(
+    email: "#{ENV.fetch("TENANT1_USER")}@#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    name: "#{ENV.fetch("TENANT1_USER")}",
+    password_digest: "#{User.digest(ENV.fetch("TENANT1_USER1_PASSWORD"))}",
+    tenant_id: tenant1.id
+)
 
 # Create Tenant2 Data
 tenant2 = Tenant.create!(name: "#{ENV.fetch("TENANT2_NAME")}")
-User.create!(email: "#{ENV.fetch("TENANT2_USER")}@#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase, 
-              name: "#{ENV.fetch("TENANT2_USER")}", 
-              password_digest: "#{User.digest(ENV.fetch("TENANT2_USER1_PASSWORD"))}", 
-              tenant_id: tenant2.id)
+User.create!(
+    email: "#{ENV.fetch("TENANT2_USER")}@#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    name: "#{ENV.fetch("TENANT2_USER")}",
+    password_digest: "#{User.digest(ENV.fetch("TENANT2_USER1_PASSWORD"))}",
+    tenant_id: tenant2.id
+)
 
 # ENABLE ROW LEVEL SECURITY
 sql = """ ALTER TABLE users ENABLE ROW LEVEL SECURITY;

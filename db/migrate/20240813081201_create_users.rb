@@ -1,5 +1,4 @@
 class CreateUsers < ActiveRecord::Migration[7.2]
-
   enable_extension "uuid-ossp"
 
   def change

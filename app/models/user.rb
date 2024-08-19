@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   has_secure_password :password, validations: true
 
   def User.digest(string)

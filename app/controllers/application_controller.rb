@@ -25,5 +25,4 @@ class ApplicationController < ActionController::Base
       tenant1_logout
     ]
   end
-  
 end

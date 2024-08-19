@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
   constraints subdomain: "#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
-    namespace :tenant1, path: '' do
+    namespace :tenant1, path: "" do
       post "login", to: "sessions/create", as: :tenant1_login
       post "logout", to: "sessions/destroy", as: :tenant1_logout
       root to: "dashboard#index"
@@ -9,18 +8,16 @@ Rails.application.routes.draw do
   end
 
   constraints subdomain: "#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
-    namespace :tenant2, path: '' do
+    namespace :tenant2, path: "" do
       root to: "dashboard#index"
     end
   end
 
   constraints(lambda { |req| req.subdomains.empty? }) do
-    root to: 'application#not_found'
+    root to: "application#not_found"
   end
 
-  #get "/log_subdomain", to: "application#log_subdomain"
-
-  match '*path', to: 'application#not_found', via: :all
+  match "*path", to: "application#not_found", via: :all
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
