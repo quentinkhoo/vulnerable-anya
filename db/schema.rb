@@ -16,15 +16,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_13_081201) do
   enable_extension "uuid-ossp"
 
   create_table "tenants", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "email"
-    t.string "name"
-    t.string "password_digest"
+    t.string "email", default: "", null: false
+    t.string "name", default: "", null: false
+    t.string "password_digest", default: "", null: false
     t.uuid "tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

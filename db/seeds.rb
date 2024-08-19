@@ -29,9 +29,9 @@ User.create!(
     tenant_id: tenant2.id
 )
 
-# ENABLE ROW LEVEL SECURITY
-sql = """ ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-          ALTER TABLE users FORCE ROW LEVEL SECURITY;
-          CREATE POLICY tenant_isolation_policy ON users USING (tenant_id = current_setting('app.current_tenant_id')::UUID);
-      """
-ActiveRecord::Base.connection.execute(sql)
+# # ENABLE ROW LEVEL SECURITY
+# sql = """ ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+#           ALTER TABLE users FORCE ROW LEVEL SECURITY;
+#           CREATE POLICY tenant_isolation_policy ON users USING (tenant_id = current_setting('app.current_tenant_id')::UUID);
+#       """
+# ActiveRecord::Base.connection.execute(sql)

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   constraints subdomain: "#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
     namespace :tenant1, path: "" do
-      post "login", to: "sessions/create", as: :tenant1_login
-      post "logout", to: "sessions/destroy", as: :tenant1_logout
       root to: "dashboard#index"
     end
   end
