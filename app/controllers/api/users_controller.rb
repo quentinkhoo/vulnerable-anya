@@ -1,4 +1,4 @@
-class Tenant1::UsersController < Tenant1Controller
+class Api::UsersController < ApplicationController
   def index
     @users = User.all
     render json: @users, status: :ok

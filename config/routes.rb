@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   constraints subdomain: "#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
     namespace :tenant1, path: "" do
       root to: "dashboard#index", as: "tenant1_root"
@@ -10,6 +11,12 @@ Rails.application.routes.draw do
     namespace :tenant2, path: "" do
       root to: "dashboard#index", as: "tenant2_root"
       post "/auth/token", to: "token#create", as: "tenant2_login"
+    end
+  end
+
+  constraints subdomain: "api#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
+    namespace :api, path: "" do
+      get "/users", to: "users#index", as: "api_users"
     end
   end
 

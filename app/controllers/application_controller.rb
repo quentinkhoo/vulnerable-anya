@@ -12,14 +12,20 @@ class ApplicationController < ActionController::Base
     render plain: "404 Not Found", status: :not_found
   end
 
+  def set_current_tenant(tenant_id)
+    sql = "set app.current_tenant_id to '#{tenant_id}'"
+    result = ActiveRecord::Base.connection.execute(sql)
+  end
+
   def authenticate_request
     header = request.headers["ANYA-ACCESS-TOKEN"]
     token = header.split(" ").last if header
     begin
       decoded = jwt_decode(token)
-      @current_user = User.find(decoded[:user_id])
-      @current_tenant = Tenant.find(decoded[:tenant_id])
-    rescue
+      set_current_tenant(decoded[:tenant_id])
+      current_user = User.find(decoded[:user_id])
+      current_tenant = Tenant.find(decoded[:tenant_id])
+    rescue Exception => e
       render json: { error: "Invalid token" }, status: :unauthorized
     end
   end
