@@ -1,5 +1,4 @@
 class Tenant1::UsersController < Tenant1Controller
-
   def index
     @users = User.all
     render json: @users, status: :ok

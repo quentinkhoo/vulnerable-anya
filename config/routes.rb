@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
-
   constraints subdomain: "#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
     namespace :tenant1, path: "" do
-      root to: "dashboard#index"
+      root to: "dashboard#index", as: "tenant1_root"
+      post "/auth/token", to: "token#create", as: "tenant1_token"
     end
-    post "/auth/login", to: "authentication#login"
   end
 
   constraints subdomain: "#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
     namespace :tenant2, path: "" do
-      root to: "dashboard#index"
+      root to: "dashboard#index", as: "tenant2_root"
+      post "/auth/token", to: "token#create", as: "tenant2_login"
     end
-    post "/auth/login", to: "authentication#login", as: "tenant2_login"
   end
 
-  constraints(lambda { |req| req.subdomains.empty? }) do
+  constraints(lambda { |req| req.subdomains.empty? || !req.subdomains.include?(Rails.configuration.tenant_subdomains) }) do
     root to: "application#not_found"
   end
 

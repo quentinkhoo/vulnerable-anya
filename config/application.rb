@@ -27,5 +27,10 @@ module VulnerableAnya
     config.generators.test_framework false
 
     config.middleware.use SetCurrentTenant
+
+    config.tenant_subdomains = [
+      "#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase,
+      "#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase
+    ]
   end
 end
