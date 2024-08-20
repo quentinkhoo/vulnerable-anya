@@ -1,4 +1,4 @@
-class Tenant1::UsersController < ApplicationController
+class Tenant1::UsersController < Tenant1Controller
 
   def index
     @users = User.all
