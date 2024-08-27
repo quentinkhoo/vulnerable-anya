@@ -29,7 +29,7 @@ module VulnerableAnya
     config.middleware.use SetCurrentTenant
 
     config.tenant_subdomains = [
-      "api#{ENV.fetch("SUBROOT_DOMAIN")}".downcase,
+      "vuln-api#{ENV.fetch("SUBROOT_DOMAIN")}".downcase,
       "#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase,
       "#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}".downcase
     ]
