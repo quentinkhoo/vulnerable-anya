@@ -23,8 +23,6 @@ class ApplicationController < ActionController::Base
     begin
       decoded_token = jwt_decode(token)
       set_current_tenant(decoded_token[:tenant_id])
-      current_user = User.find(decoded_token[:user_id])
-      current_tenant = Tenant.find(decoded_token[:tenant_id])
     rescue Exception => e
       render json: { error: "Invalid token" }, status: :unauthorized
     end

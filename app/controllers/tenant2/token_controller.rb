@@ -1,5 +1,8 @@
 class Tenant2::TokenController < Tenant2Controller
-  skip_before_action :authenticate_request, only: [ :create ]
+  skip_before_action :authenticate_request, only: [ :create, :index ]
+
+  def index
+  end
 
   def create
     user = User.find_by(email: params[:email])

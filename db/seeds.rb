@@ -16,25 +16,25 @@ tenant1 = Tenant.create!(name: "#{ENV.fetch("TENANT1_NAME")}")
 
 # Create Tenant1 Users
 User.create!(
-    email: "#{ENV.fetch("TENANT1_USER1")}@#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    email: "#{ENV.fetch("TENANT1_USER1")}@#{ENV.fetch("TENANT1_NAME")}".downcase,
     name: "#{ENV.fetch("TENANT1_USER1")}",
     password_digest: "#{User.digest(ENV.fetch("TENANT1_USER1_PASSWORD"))}",
     tenant_id: tenant1.id
 )
 User.create!(
-    email: "#{ENV.fetch("TENANT1_USER2")}@#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    email: "#{ENV.fetch("TENANT1_USER2")}@#{ENV.fetch("TENANT1_NAME")}".downcase,
     name: "#{ENV.fetch("TENANT1_USER2")}",
     password_digest: "#{User.digest(ENV.fetch("TENANT1_USER2_PASSWORD"))}",
     tenant_id: tenant1.id
 )
 User.create!(
-    email: "#{ENV.fetch("TENANT1_USER3")}@#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    email: "#{ENV.fetch("TENANT1_USER3")}@#{ENV.fetch("TENANT1_NAME")}".downcase,
     name: "#{ENV.fetch("TENANT1_USER3")}",
     password_digest: "#{User.digest(ENV.fetch("TENANT1_USER3_PASSWORD"))}",
     tenant_id: tenant1.id
 )
 User.create!(
-    email: "#{ENV.fetch("TENANT1_USER4")}@#{ENV.fetch("TENANT1_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    email: "#{ENV.fetch("TENANT1_USER4")}@#{ENV.fetch("TENANT1_NAME")}".downcase,
     name: "#{ENV.fetch("TENANT1_USER4")}",
     password_digest: "#{User.digest(ENV.fetch("TENANT1_USER4_PASSWORD"))}",
     tenant_id: tenant1.id
@@ -43,19 +43,19 @@ User.create!(
 # Create Tenant2 Data
 tenant2 = Tenant.create!(name: "#{ENV.fetch("TENANT2_NAME")}")
 User.create!(
-    email: "#{ENV.fetch("TENANT2_USER1")}@#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    email: "#{ENV.fetch("TENANT2_USER1")}@#{ENV.fetch("TENANT2_NAME")}".downcase,
     name: "#{ENV.fetch("TENANT2_USER1")}",
     password_digest: "#{User.digest(ENV.fetch("TENANT2_USER1_PASSWORD"))}",
     tenant_id: tenant2.id
 )
 User.create!(
-    email: "#{ENV.fetch("TENANT2_USER2")}@#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    email: "#{ENV.fetch("TENANT2_USER2")}@#{ENV.fetch("TENANT2_NAME")}".downcase,
     name: "#{ENV.fetch("TENANT2_USER2")}",
     password_digest: "#{User.digest(ENV.fetch("TENANT2_USER2_PASSWORD"))}",
     tenant_id: tenant2.id
 )
 User.create!(
-    email: "#{ENV.fetch("TENANT2_USER3")}@#{ENV.fetch("TENANT2_NAME")}#{ENV.fetch("SUBROOT_DOMAIN")}#{ENV.fetch("ROOT_DOMAIN")}".downcase,
+    email: "#{ENV.fetch("TENANT2_USER3")}@#{ENV.fetch("TENANT2_NAME")}".downcase,
     name: "#{ENV.fetch("TENANT2_USER3")}",
     password_digest: "#{User.digest(ENV.fetch("TENANT2_USER3_PASSWORD"))}",
     tenant_id: tenant2.id

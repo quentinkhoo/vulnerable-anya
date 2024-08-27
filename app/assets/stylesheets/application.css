@@ -180,7 +180,40 @@ tr:hover {
 td, th {
   border-right: 1px solid #2c2827; /* Right border */
 }
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
 
+label {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+input[type="text"] ,
+input[type="password"],
+input[type="email"] {
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid grey;
+}
+
+input[type="submit"] {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
 
 @media screen and (max-width: 600px) {
   table, thead, tbody, th, td, tr {
