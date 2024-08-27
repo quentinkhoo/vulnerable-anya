@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   constraints subdomain: "api#{ENV.fetch("SUBROOT_DOMAIN")}".downcase do
     namespace :api, path: "" do
       get "/users", to: "users#index", as: "users"
+      get "/user/:id", to: "users#show", as: "user"
     end
   end
 
