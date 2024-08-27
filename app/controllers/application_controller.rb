@@ -21,10 +21,10 @@ class ApplicationController < ActionController::Base
     header = request.headers["ANYA-ACCESS-TOKEN"]
     token = header.split(" ").last if header
     begin
-      decoded = jwt_decode(token)
-      set_current_tenant(decoded[:tenant_id])
-      current_user = User.find(decoded[:user_id])
-      current_tenant = Tenant.find(decoded[:tenant_id])
+      decoded_token = jwt_decode(token)
+      set_current_tenant(decoded_token[:tenant_id])
+      current_user = User.find(decoded_token[:user_id])
+      current_tenant = Tenant.find(decoded_token[:tenant_id])
     rescue Exception => e
       render json: { error: "Invalid token" }, status: :unauthorized
     end
