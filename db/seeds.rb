@@ -8,12 +8,12 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Order.destroy_all
-GiftCard.destroy_all
-Supplier.destroy_all
+# Order.destroy_all
+# GiftCard.destroy_all
+# Supplier.destroy_all
 
-User.destroy_all
-Tenant.destroy_all
+# User.destroy_all
+# Tenant.destroy_all
 
 # Create Tenant1 Data
 tenant1 = Tenant.create!(name: "#{ENV.fetch("TENANT1_NAME")}")
@@ -70,21 +70,15 @@ supplier1 = Supplier.create!(name: "treeple")
 supplier2 = Supplier.create!(name: "stood_up")
 supplier3 = Supplier.create!(name: "married")
 
-# Create GiftCard Data
+# Create Tenant1 GiftCard Data
+ActiveRecord::Base.connection.execute("set app.current_tenant_id to '#{tenant1.id}'")
+
 giftcard1 = GiftCard.create!(
     name: "Spy X Family",
     description: "Waku waku",
     url: "https://spy-x-family.fandom.com/",
     supplier_id: supplier1.id,
     tenant_name_id: tenant1.id
-)
-
-giftcard2 = GiftCard.create!(
-    name: "Oshi No Ko",
-    description: "Who murdered Ai Hoshino?",
-    url: "https://www.reddit.com/r/OshiNoKo/",
-    supplier_id: supplier1.id,
-    tenant_name_id: tenant2.id
 )
 
 giftcard3 = GiftCard.create!(
@@ -103,14 +97,6 @@ giftcard4 = GiftCard.create!(
     tenant_name_id: tenant1.id
 )
 
-giftcard5 = GiftCard.create!(
-    name: "Sousou no Frieren",
-    description: "Where can I find Frieren merchandise?",
-    url: "https://frieren-anime.jp/",
-    supplier_id: supplier3.id,
-    tenant_name_id: tenant2.id
-)
-
 giftcard6 = GiftCard.create!(
     name: "Zero kara Hajimaru Isekai Seikatsu",
     description: "Rem ga daisuki",
@@ -127,6 +113,24 @@ giftcard7 = GiftCard.create!(
     tenant_name_id: tenant1.id
 )
 
+# Create Tenant2 GiftCard Data
+ActiveRecord::Base.connection.execute("set app.current_tenant_id to '#{tenant2.id}'")
+giftcard2 = GiftCard.create!(
+    name: "Oshi No Ko",
+    description: "Who murdered Ai Hoshino?",
+    url: "https://www.reddit.com/r/OshiNoKo/",
+    supplier_id: supplier1.id,
+    tenant_name_id: tenant2.id
+)
+
+giftcard5 = GiftCard.create!(
+    name: "Sousou no Frieren",
+    description: "Where can I find Frieren merchandise?",
+    url: "https://frieren-anime.jp/",
+    supplier_id: supplier3.id,
+    tenant_name_id: tenant2.id
+)
+
 giftcard8 = GiftCard.create!(
     name: "Migi to Dali",
     description: "Did you know migi means right in Japanese and dali is short for hidari, which means left in Japanese?",
@@ -135,7 +139,6 @@ giftcard8 = GiftCard.create!(
     tenant_name_id: tenant2.id
 )
 
-# Create Order Data
 order1 = Order.create!(
     user_id: tenant1_user1.id,
     gift_card_id: giftcard1.id

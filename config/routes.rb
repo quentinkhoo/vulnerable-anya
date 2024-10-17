@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     namespace :api, path: "" do
       get "/users", to: "users#index", as: "users"
       get "/user/:id", to: "users#show", as: "user"
+      get "/giftcards", to: "giftcards#index", as: "giftcards"
     end
   end
 
